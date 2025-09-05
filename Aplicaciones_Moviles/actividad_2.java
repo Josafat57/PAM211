@@ -5,6 +5,7 @@ class PAM {
     String lineamientos;
     String fechas;
     double porcentajes;
+}
 
 public class actividad_2 {
     public static void main(String[] args) {
@@ -82,6 +83,5 @@ public class actividad_2 {
             }
         } while (opcion != 5);
         scanner.close();
-        }
     }
 }
