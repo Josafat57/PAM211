@@ -1,46 +1,53 @@
-import { Text, StyleSheet, View, Button, } from 'react-native';
-import React, { useState } from 'react';
-import MenuScreen from './MenuScreen';
+import {View, Text, StyleSheet, Button, Modal} from 'react-native';
+import React, {useState} from 'react';
 
-export default function ModalScreen() {
-   const [screen, setScreen] = useState('modal');
+export default function ModalScreen () {
+  const [modalVisible, setModalVisible] = useState(false);
 
-   switch (screen) {
-     case 'menu': return <MenuScreen/>;
-     default:
-       return (
-         <View style={styles.background}>
-           <Text style={styles.title}>Próximamente...</Text>
-           <br/>
-           <Text style={styles.title}>En algún futuro cercano esto tendrá contenido...</Text>
-           <br/>
-           <View style={styles.buttonWrapper}>
-             <Button onPress={() => setScreen('menu')} title="Volver al menú" color="#000"/>
-           </View>
-          
-         </View>
-       );
-   }
+  return(
+    <View style={styles.container}>
+      <Button title='Mostrar Modal' onPress={()=> setModalVisible(true)} color='purple'>
+        Clickeame :3
+      </Button>
+
+      <Modal animationType='fade' transparent={true} visible={modalVisible} onRequestClose={()=> setModalVisible(!modalVisible)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.textoModal}>
+              Soy un modal :D
+            </Text>
+            <Button title='Ocultar Modal' onPress={()=> setModalVisible(false)} color='purple'>
+            </Button>
+          </View>
+        </View>
+      </Modal>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000000ff',
   },
-  title: {
-    color: '#fff',
-    fontSize: 32,
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'powderblue',
   },
-  buttonWrapper: {
-    backgroundColor: '#000',
-    borderWidth: 2,
-    borderColor: '#888',
-    borderRadius: 8,
-    marginBottom: 12,
-    width: 220,
-    overflow: 'hidden',
+  modalContent: {
+    backgroundColor: '#ffffff',
+    padding: 25,
+    borderRadius: 15,
+    alignItems: 'center',
   },
-});
+  textoModal: {
+    color: '#000000',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+})
